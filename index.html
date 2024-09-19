@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?!= HtmlService.createHtmlOutputFromFile('css').getContent()?>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
     <title>บันทึกรับแจ้งเหตุการณ์ที่มีผลกระทบต่อสิ่งแวดล้อม</title>
@@ -13,22 +14,25 @@
     </style>
 </head>
 <body>
-    <center><h1 style="color: #068197; font-size: larger;" >แบบบันทึกรับแจ้งเหตุการณ์ฯ</h1></center>
+    <center><h1 style="color: #068197; font-size: larger;" >บันทึกรับแจ้งเหตุการณ์ฯ</h1></center>
     <div class="container">
-        <form method="post" accept-charset="UTF-8" autocomplete="off" name="BlackSmoke">
+        <form method="post" accept-charset="UTF-8" autocomplete="off" name="สมุดรับแจ้งเหตุการณ์">
             <label for="date">วันที่ออกเหตุ</label>
-            <input class="input" type="date" required autocomplete="off" id="date">
+            <input class="input" type="date" required autocomplete="off" id="date" name="วันที่ออกเหตุ" >
             <label for="time">เวลาออกเหตุ</label>
-            <input class="input" type="time" required autocomplete="off" id="time">
-            <input class="input" type="text" placeholder="เหตุการณ์" required autocomplete="off" id="เหตุการณ์">
-            <input class="input" placeholder="ผู้แจ้งเหตุ" list="ชื่อผู้แจ้ง" required autocomplete="off" id="ผู้แจ้งเหตุ">
+            <input class="input" type="time" required autocomplete="off" id="time" name="เวลาออกเหตุ">
+            <label for="เหตุการณ์">เหตุการณ์</label>
+            <input class="input" type="text" placeholder="ระบุเหตุการณ์" required autocomplete="off" id="เหตุการณ์" name="เหตุการณ์">
+            <label for="ผู้แจ้งเหตุ">ผู้แจ้งเหตุ</label>
+            <input class="input" placeholder="ชื่อผู้แจ้งเหตุ" list="ชื่อผู้แจ้ง" required autocomplete="off" id="ผู้แจ้งเหตุ" name="ผู้แจ้งเหตุ">
             <datalist id="ชื่อผู้แจ้ง">
                 <option value="อิสรีย์ (ศปภ.)">
                 <option value="เจริญ (ศปภ.)">
                 <option value="นครินทร์ (ศปภ.)">
                 <option value="ยุทธนา (ศปภ.)">
             </datalist>
-            <input class="input" placeholder="ผู้รับแจ้งเหตุ" list="ชื่อผู้รับแจ้ง" required autocomplete="off" id="ผู้รับแจ้งเหตุ">
+            <label for="ผู้แจ้งเหตุ">ผู้รับแจ้งเหตุ</label>
+            <input class="input" placeholder="ชื่อผู้รับแจ้งเหตุ" list="ชื่อผู้รับแจ้ง" required autocomplete="off" id="ผู้รับแจ้งเหตุ" name="ผู้รับแจ้งเหตุ">
             <datalist id="ชื่อผู้รับแจ้ง">
                 <option value="สุภารัตน์">
                 <option value="พนิตพิชา">
@@ -41,7 +45,7 @@
 
             <label for="ผู้ออกเหตุ">ผู้ออกเหตุ</label><br>
         
-            <input class="input" placeholder="คนที่ 1" list="ชื่อผู้ออกเหตุ 1" required autocomplete="off" id="คนที่ 1">
+            <input class="input" placeholder="คนที่ 1" list="ชื่อผู้ออกเหตุ 1" required autocomplete="off" id="คนที่ 1" name="ชื่อผู้ออกเหตุ 1">
             <datalist id="ชื่อผู้ออกเหตุ 1">
                 <option value="สุภารัตน์">
                 <option value="พนิตพิชา">
@@ -51,7 +55,7 @@
                 <option value="ธนกร"> 
                 <option value="ปฎิมา">
             </datalist>
-            <input class="input" placeholder="คนที่ 2" list="ชื่อผู้ออกเหตุ 2" id="คนที่ 2">
+            <input class="input" placeholder="คนที่ 2" list="ชื่อผู้ออกเหตุ 2" id="คนที่ 2" name="ชื่อผู้ออกเหตุ 2">
             <datalist id="ชื่อผู้ออกเหตุ 2">
                 <option value="สุภารัตน์">
                 <option value="พนิตพิชา">
@@ -61,28 +65,25 @@
                 <option value="ธนกร"> 
                 <option value="ปฎิมา">
             </datalist>
-            <button class="button" type="submit" >Record</button>
+            <button class="button" type="submit" name="submit" value="submit" >Record</button>
             <p id="demo"></p>
         </form>   
     </div>
+</body>
+  
+
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwb-te6LKy8eDWg__j0dVr_jAMBMeHHUQ9z8K49wSRk3AM6ohHgpet3cKj9CwzrHIf-MQ/exec'
-        const form = document.forms['BlackSmoke']
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxy2ZPFDZM_phvEwYvMlOjpDiMarpaKgWyUU4oCaaBGxCueA8X6ihLM-kVWll2e8pyN8g/exec'
+        const form = document.forms['สมุดรับแจ้งเหตุการณ์']
         
         form.addEventListener('submit', e => {
           e.preventDefault()
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b></b></div>", BlackSmoke.reset())
+            .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b></b></div>", สมุดรับแจ้งเหตุการณ์.reset())
             .catch(error => console.error('Error!', error.message))
         })
     </script>
-   
 
 
-
-   
-    
-    
-</body>
 </html>
